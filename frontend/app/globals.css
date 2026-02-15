@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+    --cor-primaria: #7fbc03;
+    --cor-fundo: #fff;
+    --cor-texto: #5e5e5e;
+    --cor-texto-branco: #f6fbee;
+}
+
+* {
+    outline: none;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+}
+
+main {
+    flex-grow: 1;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: var(--cor-texto, #5e5e5e);
+}
+
+input[type="button"],
+input[type="submit"] {
+    padding: 16px 12px;
+    border-radius: 50px;
+}
+
+input[type="button"],
+input[type="submit"],
+button {
+    cursor: pointer;
+}
+
+.btn-primary-white {
+    background: var(--cor-fundo, #fff);
+}
+
+.login-btn {
+    width: 184px;
+}
