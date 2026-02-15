@@ -1,12 +1,13 @@
+import { LoginInterface } from "@/app/utils/login/loginInterface";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-    const fd = await req.formData();
-    const user = fd.get("user");
-    const password = fd.get("password");
+    const body: LoginInterface = await req.json();
+    const email = body.email;
+    const password = body.password;
 
     return Response.json({
-        status: 1,
+        status: 200,
         message: "Sucesso",
         token_de_acesso: "token",
         dados_usuario: {

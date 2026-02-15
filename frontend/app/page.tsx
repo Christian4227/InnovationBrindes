@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Login from "./(public)/login/page";
 
 export const metadata: Metadata = {
     title: "Login | Innovation Brindes",
@@ -7,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-    return <Login />;
+    return <></>;
 }
