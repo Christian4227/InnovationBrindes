@@ -3,12 +3,13 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
+        "dev": "dotenv -e .env.local -- next dev",
+        "build": "dotenv -e .env.local -- next build",
+        "start": "dotenv -e .env.local -- next start",
         "lint": "eslint"
     },
     "dependencies": {
+        "jsonwebtoken": "^9.0.3",
         "next": "16.1.6",
         "pnpm": "^10.29.3",
         "react": "19.2.3",
@@ -18,9 +19,11 @@
     },
     "devDependencies": {
         "@tailwindcss/postcss": "^4",
+        "@types/jsonwebtoken": "^9.0.10",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
+        "dotenv-cli": "^8.0.0",
         "eslint": "^9",
         "eslint-config-next": "16.1.6",
         "tailwindcss": "^4",
