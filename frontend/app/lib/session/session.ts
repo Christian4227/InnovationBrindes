@@ -1,9 +1,10 @@
 import { cookies } from "next/headers";
 import { generateToken } from "../jwt/jwt";
 import { redirect } from "next/navigation";
+import { UserData } from "@/app/utils/login/loginInterface";
 
-export async function createSession(email: string) {
-    const token = generateToken(email);
+export async function createSession(user: UserData) {
+    const token = generateToken(user);
 
     if (!token) return null;
 

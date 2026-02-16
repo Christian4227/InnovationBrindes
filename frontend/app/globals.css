@@ -12,7 +12,7 @@
 }
 
 body {
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
 }
 
@@ -25,6 +25,11 @@ h1 {
     font-weight: 700;
 }
 
+input[type="text"],
+input[type="password"] {
+    padding: 8px 4px;
+}
+
 input[type="text"]::placeholder,
 input[type="password"]::placeholder {
     color: var(--cor-texto, #5e5e5e);
@@ -32,7 +37,7 @@ input[type="password"]::placeholder {
 
 input[type="button"],
 input[type="submit"] {
-    padding: 16px 12px;
+    padding: 12px 8px;
     border-radius: 50px;
 }
 
@@ -56,4 +61,10 @@ input[type="checkbox"] {
     border-radius: 5px;
     accent-color: var(--cor-primaria);
     border: 1px solid var(--cor-fundo);
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 32px;
+    }
 }
