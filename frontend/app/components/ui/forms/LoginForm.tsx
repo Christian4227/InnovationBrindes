@@ -1,20 +1,22 @@
 "use client";
-import handlerLogin from "@/app/actions/loginAction";
+
 import { useActionState, useEffect } from "react";
 import Link from "next/link";
 import Toast from "../messages/Toast";
 import { toast } from "react-toastify";
+import handlerLogin from "@/app/actions/loginAction";
+
 // import Image from "next/image";
 
 export default function LoginForm() {
     const [state, formAction, isPending] = useActionState(handlerLogin, null);
 
-    useEffect(() => {
-        if (state?.error) {
-            toast.error(state.message);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state]);
+    // useEffect(() => {
+    //     if (state?.error) {
+    //         toast.error(state.message);
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [state?.error]);
 
     return (
         <>

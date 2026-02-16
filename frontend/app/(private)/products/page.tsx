@@ -1,12 +1,10 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Products | Innovation Brindes",
+    description: "Acesse os seus produtos, guarde os seus favoritos e divirta-se!",
+};
 
 export default async function Products() {
-    const session = (await cookies()).get("ib_user")?.value;
-
-    if (!session) {
-        return redirect("/login");
-    }
-
     return <></>;
 }

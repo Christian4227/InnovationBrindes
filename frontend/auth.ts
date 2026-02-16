@@ -6,7 +6,7 @@ import { LoginResponse } from "./app/utils/login/loginInterface";
 import { createSession } from "./app/lib/session/session";
 
 async function getUser(email: string, senha: string) {
-    const response = await fetch("https://apihomolog.innovationbrindes.com.br/api/innova-dinamica/login/acessar", {
+    const response = await fetch(`${process.env.API_URL}/api/innova-dinamica/login/acessar`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ async function getUser(email: string, senha: string) {
 export const { auth, handlers, signIn, signOut } = NextAuth({
     ...authConfig,
     secret: process.env.AUTH_SECRET,
-    debug: process.env.NODE_ENV != "production",
+    // debug: process.env.NODE_ENV != "production",
     session: {
         strategy: "jwt",
     },
@@ -70,10 +70,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             return false;
         },
         async session({ session, user, token }) {
-            session.user = {
-                ...token,
-                name: user.name,
-            };
             return session;
         },
         async jwt({ token, user, account, profile }) {
