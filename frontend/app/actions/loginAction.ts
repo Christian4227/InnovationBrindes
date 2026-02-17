@@ -23,11 +23,11 @@ export default async function handlerLogin(_: unknown, formData: FormData) {
     let response;
 
     try {
-        // response = await signIn("credentials", {
-        //     user: validateLogin.data.user,
-        //     password: validateLogin.data.password,
-        //     redirect: false,
-        // });
+        response = await signIn("credentials", {
+            user: validateLogin.data.user,
+            password: validateLogin.data.password,
+            redirect: false,
+        });
     } catch {
         return {
             status: 500,
@@ -36,13 +36,13 @@ export default async function handlerLogin(_: unknown, formData: FormData) {
         };
     }
 
-    // if (!response.error) {
-    //     redirect("/products");
-    // } else {
-    //     return {
-    //         status: 400,
-    //         message: "Usuário/senha incorretos.",
-    //         error: true,
-    //     };
-    // }
+    if (!response.error) {
+        redirect("/products");
+    } else {
+        return {
+            status: 400,
+            message: "Usuário/senha incorretos.",
+            error: true,
+        };
+    }
 }

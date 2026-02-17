@@ -9,28 +9,56 @@ Gerenciador de pacote principal usado: pnpm
 
 - Zod: Validação de dados
 
-# Configuração do Banco de Dados (Docker)
+# Pré-requisitos
+
+Certifique-se de ter instalado em sua máquina:
+
+- Node.js
+- pnpm
+- Docker
+
+# Passo a passo para rodar o projeto
+
+## 1. Configuração do Banco de Dados (Docker)
 
 Este projeto utiliza Docker para o banco de dados PostgreSQL.
 
-## Como rodar
+1. Crie um arquivo `.env` na **raiz do projeto** (mesmo nível do `docker-compose.yml`) com a seguinte variável:
 
-Antes de executar o arquivo Docker Compose, é necessário instalar o Docker na sua máquina.
-Para isso, acesse o site oficial do Docker e siga as instruções de instalação.
+    ```env
+    DOCKER_DB_PASSWORD=senhaDoPostegres
+    ```
 
-Para iniciar o container do banco de dados, execute o comando abaixo na raiz do projeto:
+2. Inicie o container do banco de dados executando o comando na raiz do projeto:
 
-```bash
-docker compose up -d
-```
+    ```bash
+    docker compose up -d
+    ```
 
-O banco de dados estará acessível na porta `5456`.
+    O banco de dados estará acessível na porta `5456`.
+    Para verificar se está rodando, use `docker ps` e procure pelo container `innovation_brindes_container`.
 
-Para verificar se o Docker está executando na sua máquina, abra um novo terminal e na pasta raiz do projeto execute o comando docker ps. O nome do conteiner innovation_brindes_container será exibido no log das informações.
+## 2. Configuração e Execução do Frontend
 
-Para inicializar o docker compose, é necessário adicionar um arquivo .env no mesmo nível do arquivo docker-compose.yml com a seguinte variável de ambiente:
+1. Navegue até a pasta do frontend:
 
-DOCKER_DB_PASSWORD=senhaDoPostegres
+    ```bash
+    cd frontend
+    ```
+
+2. Instale as dependências:
+
+    ```bash
+    pnpm install
+    ```
+
+3. Execute o projeto em modo de desenvolvimento:
+
+    ```bash
+    pnpm dev
+    ```
+
+4. Acesse a aplicação no navegador em `http://localhost:3000`.
 
 # Decisões técnicas tomadas durante a implementação do sistema
 
@@ -39,16 +67,22 @@ DOCKER_DB_PASSWORD=senhaDoPostegres
 Decidi escolher o Docker Compose por ser um arquivo que não precisa adicionar um arquivo Dockerfile e escrever linhas de comando para dockerizar a aplicação.
 Além disso, adicionei arquivos .env no mesmo nível do docker compose e dentro da pasta frontend para não expor informações confidenciais e sensíveis
 
-## Escolha da base de dados - PostegresSQL
+## Escolha da base de dados - PostgreSQL
 
-Para esta dinâmica, eu escolhi o PostegresSQL por ser uma base de dados que eu já conhecço e por ser simples para ser configurado.
+Para esta dinâmica, eu escolhi o PostgreSQL por ser uma base de dados que eu já conheço e por ser simples para ser configurado.
 
-METHOD: POST
-URL: https://apihomolog.innovationbrindes.com.br/api/innova-dinamica/login/acessar HEADER:
-Content-Type => application/json
+## Fluxo de Login
+
+**Endpoint**: `POST https://apihomolog.innovationbrindes.com.br/api/innova-dinamica/login/acessar`
 
 No login, usei um formulário para os campos e, para a validação dos campos, usei o Zod como forma de definir os tipos de dados e definí-los como obrigatórios.
 Se falhar na validação, uma mensagem de erro será retornado e exibida na tela.
 Se passar na validação, será feito um fetch para o endpoint indicado no PDF da dinâmica.
 Se falhar na requisição, será enviado e exibida uma mensagem na tela com o motivo da falha da requisição.
 Senão, o usuário será redirecionado para a tela de produtos com o token.
+
+# Tailwind
+
+## Variáveis
+
+Decidi não usar, por hora, o @theme por ainda não saber configurar, mas apliquei as variáveis css dentro do classname do Tailwind.

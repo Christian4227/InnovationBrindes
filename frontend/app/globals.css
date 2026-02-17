@@ -1,10 +1,20 @@
 @import "tailwindcss";
 
+@theme {
+    --cor-primaria: #7fbc03;
+    --cor-fundo: var(--cor-fundo);
+    --cor-texto: var(--cor-texto);
+    --cor-texto-branco: var(--cor-texto-branco);
+}
+
 :root {
     --cor-primaria: #7fbc03;
     --cor-fundo: #fff;
     --cor-texto: #5e5e5e;
     --cor-texto-branco: #f6fbee;
+    --cor-texto-preto: #1d1d1d;
+    --cor-borda-card: #e5e5e5;
+    --cor-borda-interna: #e5e7eb;
 }
 
 * {

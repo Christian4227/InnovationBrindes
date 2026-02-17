@@ -1,4 +1,6 @@
+import CardProduct from "@/app/components/ui/cards/CardProduct";
 import { Metadata } from "next";
+import HeaderProducts from "./_components/HeaderProducts";
 
 export const metadata: Metadata = {
     title: "Products | Innovation Brindes",
@@ -6,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Products() {
-    return <></>;
+    return (
+        <>
+            <HeaderProducts />
+            {/* <CardProduct /> */}
+        </>
+    );
 }
