@@ -7,9 +7,12 @@ import { toast } from "react-toastify";
 import handlerLogin from "@/app/actions/loginAction";
 import Image from "next/image";
 import teste from "@images/next.svg";
+import { useStoreProfile } from "@/app/lib/zustand/useStoreProfile";
 
 export default function LoginForm() {
     const [state, formAction, isPending] = useActionState(handlerLogin, null);
+    const isRememberLogin = useStoreProfile((state) => state.rememberLogin);
+    const setRememberLogin = useStoreProfile((state) => state.setRememberLogin);
 
     useEffect(() => {
         if (state?.error) {
@@ -52,7 +55,7 @@ export default function LoginForm() {
                         </div>
                         <div className="self-stretch flex items-start justify-between gap-5 text-base text-white">
                             <div className="flex gap-3 items-center">
-                                <input type="checkbox" name="manter-logado" id="manter-logado" defaultChecked={false} />
+                                <input type="checkbox" name="manter-logado" id="manter-logado" onChange={(e) => setRememberLogin(e.target.checked)} checked={isRememberLogin} />
                                 <label htmlFor="manter-logado" className="text-sm text-white lg:text-lg">
                                     Manter logado
                                 </label>
