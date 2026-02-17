@@ -18,8 +18,6 @@ export default function HeaderProducts() {
                     <span className="text-(--cor-texto-branco) text-sm font-normal">Quarta, 29/02/2020</span>
                 </div>
             </div>
-            {/* Tirar depois */}
-            {/* <input type="button" value="Sair" onClick={() => signOut()} /> */}
         </header>
     );
 }
