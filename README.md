@@ -86,3 +86,9 @@ Senão, o usuário será redirecionado para a tela de produtos com o token.
 ## Variáveis
 
 Decidi não usar, por hora, o @theme por ainda não saber configurar, mas apliquei as variáveis css dentro do classname do Tailwind.
+
+# Cache
+
+## Imagens
+
+Para o cache de imagens do sistema em questão, decidi usar o período de 1 dia, pois penso que é um bom tempo para não pesar o tempo de processamento ao recarregar a página e pesar na busca da imagem do produto novamente.

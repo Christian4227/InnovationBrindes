@@ -78,7 +78,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             }
             return false;
         },
-        async session({ session, user, token }) {
+        async session({ session, token }) {
             session.remember = token.remember;
             return session;
         },
