@@ -1,8 +1,9 @@
 import z from "zod";
 import { loginSchema } from "../schemas/login";
+import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-export default async function handlerLogin(previousState: unknown, formData: FormData) {
+export default async function handlerLogin(_: unknown, formData: FormData) {
     const validateLogin = loginSchema.safeParse({
         user: String(formData.get("user")),
         password: String(formData.get("password")),
@@ -13,34 +14,35 @@ export default async function handlerLogin(previousState: unknown, formData: For
             status: 400,
             errors: z.treeifyError(validateLogin.error).properties,
             error: true,
-            previousState,
+            values: validateLogin?.data ?? {
+                user: "",
+                password: "",
+            },
         };
     }
+    let response;
 
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL!}/api/innova-dinamica/login/acessar`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(validateLogin.data),
+        response = await signIn("credentials", {
+            user: validateLogin.data.user,
+            password: validateLogin.data.password,
+            redirect: false,
         });
-        const data = await response.json();
-
-        if (!response.ok) {
-            return {
-                status: 401,
-                message: data.message,
-                error: true,
-            };
-        }
-    } catch (error) {
+    } catch {
         return {
             status: 500,
-            data: error,
+            message: "Não foi possível realizar o login. Tente novamente.",
             error: true,
         };
     }
 
-    redirect("/products");
+    if (!response.error) {
+        redirect("/products");
+    } else {
+        return {
+            status: 400,
+            message: "Usuário/senha incorretos.",
+            error: true,
+        };
+    }
 }
