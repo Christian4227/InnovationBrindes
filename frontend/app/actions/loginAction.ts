@@ -7,6 +7,7 @@ export default async function handlerLogin(_: unknown, formData: FormData) {
     const validateLogin = loginSchema.safeParse({
         user: String(formData.get("user")),
         password: String(formData.get("password")),
+        remember: Boolean(formData.get("remember")),
     });
 
     if (!validateLogin.success) {
@@ -24,8 +25,7 @@ export default async function handlerLogin(_: unknown, formData: FormData) {
 
     try {
         response = await signIn("credentials", {
-            user: validateLogin.data.user,
-            password: validateLogin.data.password,
+            ...validateLogin.data,
             redirect: false,
         });
     } catch {
