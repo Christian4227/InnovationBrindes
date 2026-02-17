@@ -5,7 +5,7 @@ import teste from "@images/next.svg";
 
 export default function HeaderProducts() {
     return (
-        <header className="w-full px-3 py-4 bg-(--cor-primaria) inline-flex justify-between items-center">
+        <header className="w-full px-3 py-4 bg-(--cor-primaria) inline-flex justify-between items-center mt-12">
             <Image src={teste} alt="Logo Innovation Brindes" width={84} height={24} className="text-(--cor-texto-branco) text-sm font-normal" />
             <div className="flex items-center gap-6">
                 <div className="inline-flex justify-center items-center gap-3">
@@ -18,6 +18,8 @@ export default function HeaderProducts() {
                     <span className="text-(--cor-texto-branco) text-sm font-normal">Quarta, 29/02/2020</span>
                 </div>
             </div>
+            {/* Tirar depois */}
+            {/* <input type="button" value="Sair" onClick={() => signOut()} /> */}
         </header>
     );
 }

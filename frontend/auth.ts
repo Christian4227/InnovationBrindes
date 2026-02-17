@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { User } from "next-auth";
 
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
@@ -39,7 +39,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             credentials: {
                 user: { label: "user", type: "text" },
                 password: { label: "password", type: "password" },
-                remember: { type: "checkbox" },
+                remember: { type: "checkbox", defaultChecked: false },
             },
 
             async authorize(credentials) {
@@ -53,11 +53,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 }
 
                 let userToken;
-                if (credentials.remember === "true" || credentials.remember === "on") {
+                if (credentials.remember) {
                     userToken = await createSession(user);
                 }
 
-                const remember = credentials.remember === "true" || credentials.remember === "on";
+                const remember = credentials.remember === true;
 
                 return {
                     id: user.codigo_usuario,
@@ -81,22 +81,14 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             session.remember = token.remember;
             return session;
         },
-        async jwt({ token, user, account, profile }) {
-            // Se NÃO marcou "lembrar-me"
-            if (token.remember === false) {
-                token.remember = user.remember;
+        async jwt({ token, user }) {
+            if (user) {
+                token.remember = (user as User).remember ?? false;
 
                 const now = Math.floor(Date.now() / 1000);
-                // expira em 1 hora (exemplo)
-                token.exp = user.remember
+                token.exp = token.remember
                     ? now + 60 * 60 * 24 * 30 // 30 dias
                     : now + 60 * 60 * 2;
-            }
-            if (user) {
-                token.remember = user.remember ?? false;
-            }
-            if (account) {
-                token.accessToken = account.access_token;
             }
             return token;
         },

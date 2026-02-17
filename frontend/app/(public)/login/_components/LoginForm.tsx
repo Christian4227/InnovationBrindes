@@ -65,7 +65,7 @@ export default function LoginForm() {
                             </Link>
                         </div>
                     </div>
-                    <input type="submit" disabled={isPending} className="btn-primary-white login-btn lg:text-lg" value={isPending ? "Enviando..." : "Login"} />
+                    <input type="submit" disabled={isPending} className="btn-primary-white rounded-[50px] lg:text-lg login-btn" value={isPending ? "Enviando..." : "Login"} />
                 </form>
             </article>
             <Toast />
