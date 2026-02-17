@@ -1,6 +1,6 @@
-import CardProduct from "@/app/components/ui/cards/CardProduct";
 import { Metadata } from "next";
 import HeaderProducts from "./_components/HeaderProducts";
+import { auth } from "@/auth";
 
 export const metadata: Metadata = {
     title: "Products | Innovation Brindes",
@@ -8,10 +8,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Products() {
+    const session = await auth();
+    if (!session) return <div>Not authenticated</div>;
     return (
         <>
             <HeaderProducts />
-            {/* <CardProduct /> */}
         </>
     );
 }

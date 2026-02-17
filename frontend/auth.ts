@@ -31,6 +31,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     // debug: process.env.NODE_ENV != "production",
     session: {
         strategy: "jwt",
+        maxAge: 60 * 60 * 24,
     },
     providers: [
         Credentials({
@@ -38,6 +39,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             credentials: {
                 user: { label: "user", type: "text" },
                 password: { label: "password", type: "password" },
+                remember: { type: "checkbox" },
             },
 
             async authorize(credentials) {
@@ -50,12 +52,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                     throw new Error("Usuário/senha incorretos.");
                 }
 
-                const userToken = await createSession(user);
+                let userToken;
+                if (credentials.remember === "true" || credentials.remember === "on") {
+                    userToken = await createSession(user);
+                }
+
+                const remember = credentials.remember === "true" || credentials.remember === "on";
 
                 return {
                     id: user.codigo_usuario,
                     name: user.nome_usuario,
                     accessToken: userToken,
+                    remember,
                 };
             },
         }),
@@ -70,9 +78,23 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             return false;
         },
         async session({ session, user, token }) {
+            session.remember = token.remember;
             return session;
         },
         async jwt({ token, user, account, profile }) {
+            // Se NÃO marcou "lembrar-me"
+            if (token.remember === false) {
+                token.remember = user.remember;
+
+                const now = Math.floor(Date.now() / 1000);
+                // expira em 1 hora (exemplo)
+                token.exp = user.remember
+                    ? now + 60 * 60 * 24 * 30 // 30 dias
+                    : now + 60 * 60 * 2;
+            }
+            if (user) {
+                token.remember = user.remember ?? false;
+            }
             if (account) {
                 token.accessToken = account.access_token;
             }

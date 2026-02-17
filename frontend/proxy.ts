@@ -1,20 +1,21 @@
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import { auth } from "@/auth";
 
-export default async function proxy(request: NextRequest) {
-    const token = (await cookies()).get("ib_user")?.value;
+export default auth((req) => {
+    const isLoggedIn = !!req.auth;
+    const { pathname } = req.nextUrl;
 
-    if (!token) {
-        return NextResponse.redirect(new URL("/login", request.url));
+    // 🔒 Se NÃO estiver logado e tentar acessar área protegida → vai pro login
+    if (!isLoggedIn) {
+        const loginUrl = new URL("/login", req.nextUrl.origin);
+        loginUrl.searchParams.set("callbackUrl", pathname);
+        return NextResponse.redirect(loginUrl);
     }
 
-    if (!request.nextUrl.pathname.startsWith("/products")) {
-        return NextResponse.redirect(new URL("/products/", request.url));
-    }
-
+    // ✅ Se estiver logado, deixa seguir normalmente
     return NextResponse.next();
-}
+});
 
 export const config = {
-    matcher: "/products/:path*",
+    matcher: ["/products/:path*", "/products/:path*"], // rotas protegidas
 };

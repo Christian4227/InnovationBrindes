@@ -7,4 +7,7 @@ export const loginSchema = z.object({
     password: z.string({
         error: "Digite uma senha",
     }),
+    remember: z.boolean({
+        error: "O manter conectado deve ser informado.",
+    }),
 });

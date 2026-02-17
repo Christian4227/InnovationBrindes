@@ -9,6 +9,8 @@
 
 :root {
     --cor-primaria: #7fbc03;
+    --cor-primaria-checkbox: #547d01;
+    --cor-fundo-componente-focus: #d3d3d3;
     --cor-fundo: #fff;
     --cor-texto: #5e5e5e;
     --cor-texto-branco: #f6fbee;
@@ -21,18 +23,19 @@
     outline: none;
 }
 
-body {
-    min-height: 100dvh;
-    display: flex;
-}
-
 main {
-    flex-grow: 1;
+    min-height: 100vh;
 }
 
 h1 {
     font-size: 48px;
     font-weight: 700;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--cor-fundo-componente-focus);
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
 input[type="text"],
@@ -57,6 +60,13 @@ button {
     cursor: pointer;
 }
 
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="button"]:focus,
+input[type="submit"]:focus {
+    background-color: var(--cor-fundo-componente-focus);
+}
+
 .btn-primary-white {
     background: var(--cor-fundo, #fff);
 }
@@ -69,8 +79,17 @@ input[type="checkbox"] {
     width: 20px;
     height: 20px;
     border-radius: 5px;
-    accent-color: var(--cor-primaria);
+    accent-color: var(--cor-primaria-checkbox);
     border: 1px solid var(--cor-fundo);
+}
+
+input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--cor-fundo-componente-focus);
+    outline-offset: 2px;
+}
+
+form .div-campo:focus-within {
+    background-color: var(--cor-fundo-componente-focus);
 }
 
 @media screen and (max-width: 768px) {
