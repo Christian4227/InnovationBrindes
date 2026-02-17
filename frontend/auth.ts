@@ -31,6 +31,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     // debug: process.env.NODE_ENV != "production",
     session: {
         strategy: "jwt",
+        maxAge: 60 * 60 * 24 * 30,
     },
     providers: [
         Credentials({
@@ -38,6 +39,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             credentials: {
                 user: { label: "user", type: "text" },
                 password: { label: "password", type: "password" },
+                remember: { type: "checkbox" },
             },
 
             async authorize(credentials) {
@@ -56,6 +58,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                     id: user.codigo_usuario,
                     name: user.nome_usuario,
                     accessToken: userToken,
+                    remember: credentials.remember,
                 };
             },
         }),
@@ -73,6 +76,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             return session;
         },
         async jwt({ token, user, account, profile }) {
+            // Se NÃO marcou "lembrar-me"
+            if (token.remember === false || token.remember === "false") {
+                // expira em 1 hora (exemplo)
+                token.exp = Math.floor(Date.now() / 1000) + 1;
+            }
             if (account) {
                 token.accessToken = account.access_token;
             }

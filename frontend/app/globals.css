@@ -9,7 +9,8 @@
 
 :root {
     --cor-primaria: #7fbc03;
-    --cor-fundo-componente-focus: #e1e1e1;
+    --cor-primaria-checkbox: #547d01;
+    --cor-fundo-componente-focus: #d3d3d3;
     --cor-fundo: #fff;
     --cor-texto: #5e5e5e;
     --cor-texto-branco: #f6fbee;
@@ -59,6 +60,8 @@ button {
     cursor: pointer;
 }
 
+input[type="button"]:hover,
+input[type="submit"]:hover,
 input[type="button"]:focus,
 input[type="submit"]:focus {
     background-color: var(--cor-fundo-componente-focus);
@@ -76,7 +79,7 @@ input[type="checkbox"] {
     width: 20px;
     height: 20px;
     border-radius: 5px;
-    accent-color: var(--cor-primaria);
+    accent-color: var(--cor-primaria-checkbox);
     border: 1px solid var(--cor-fundo);
 }
 

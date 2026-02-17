@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import Link from "next/link";
-import Toast from "../messages/Toast";
+import Toast from "../../../components/ui/messages/Toast";
 import { toast } from "react-toastify";
 import handlerLogin from "@/app/actions/loginAction";
 import Image from "next/image";

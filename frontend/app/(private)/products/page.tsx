@@ -1,4 +1,3 @@
-import CardProduct from "@/app/components/ui/cards/CardProduct";
 import { Metadata } from "next";
 import HeaderProducts from "./_components/HeaderProducts";
 
@@ -11,7 +10,6 @@ export default async function Products() {
     return (
         <>
             <HeaderProducts />
-            {/* <CardProduct /> */}
         </>
     );
 }
