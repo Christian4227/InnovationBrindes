@@ -17,7 +17,7 @@ export default async function Login() {
     }
 
     return (
-        <main className="flex flex-col items-center justify-center gap-12">
+        <main className="flex flex-col items-center justify-center gap-12 main-login-background">
             <section className="flex flex-col gap-8 px-4 max-md:gap-4">
                 <LoginForm />
             </section>

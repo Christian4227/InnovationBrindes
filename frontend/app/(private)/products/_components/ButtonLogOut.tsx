@@ -1,4 +1,6 @@
-import { signOut } from "@/auth";
+"use client";
+
+import { signOut } from "next-auth/react";
 
 interface ButtonLogOutProps {
     color: string;
