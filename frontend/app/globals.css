@@ -39,6 +39,12 @@ main {
     min-height: 100vh;
 }
 
+.main-login-background {
+    /* background-image: url("../public/next.svg"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 h1 {
     font-size: 48px;
     font-weight: 700;
