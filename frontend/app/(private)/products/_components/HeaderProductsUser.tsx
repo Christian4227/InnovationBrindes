@@ -1,7 +1,7 @@
 import { formatarData } from "@/app/utils/strings/data";
-import { signOut } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import ButtonLogOut from "./ButtonLogOut";
 
 interface HeaderProductsUserProps {
     nomeUsuario: string;
@@ -20,11 +20,7 @@ export default function HeaderProductsUser({ nomeUsuario, setIsOpen }: HeaderPro
                 <span className="text-(--cor-texto) text-base font-medium">{nomeUsuario}</span>
                 <span className="text-(--cor-texto) text-sm font-normal">{formatarData(undefined, "long")}</span>
             </div>
-            <div className="self-stretch py-1 border-t border-(--cor-primaria) inline-flex justify-end items-start gap-2.5">
-                <button onClick={() => signOut()} className="justify-start text-(--cor-texto) text-base font-normal">
-                    Sair
-                </button>
-            </div>
+            <ButtonLogOut color="var(--cor-texto)" />
         </aside>
     );
 }
