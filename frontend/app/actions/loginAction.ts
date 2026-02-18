@@ -7,7 +7,7 @@ export default async function handlerLogin(_: unknown, formData: FormData) {
     const validateLogin = loginSchema.safeParse({
         user: String(formData.get("user")),
         password: String(formData.get("password")),
-        remember: Boolean(formData.get("remember")),
+        remember: Boolean(formData.get("remember")) ?? false,
     });
 
     if (!validateLogin.success) {

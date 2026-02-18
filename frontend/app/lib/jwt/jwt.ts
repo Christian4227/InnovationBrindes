@@ -1,4 +1,4 @@
-import { UserData } from "@/app/utils/login/loginInterface";
+import { UserData } from "@/app/utils/login/loginInterfaces";
 import jwt from "jsonwebtoken";
 
 const secret = process.env.JWT_SECRET as string;
